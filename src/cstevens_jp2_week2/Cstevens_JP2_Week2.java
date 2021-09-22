@@ -29,6 +29,8 @@ import javafx.stage.Stage;
 public class Cstevens_JP2_Week2 extends Application {
     private final CirclePane circlePane;
     private final SquarePane squarePane;
+    private Boolean iscircle;
+    private Boolean issquare;
         
     BorderPane borderPane = new BorderPane();
 
@@ -85,8 +87,10 @@ public class Cstevens_JP2_Week2 extends Application {
         @Override // Override the handle method
         public void handle(ActionEvent e) {
             circlePane.removecircle();
+            squarePane.removesquare();
             borderPane.setCenter(circlePane);
             circlePane.addcircle();
+            iscircle = true;
         }
     }
     
@@ -94,32 +98,43 @@ public class Cstevens_JP2_Week2 extends Application {
         @Override // Override the handle method
         public void handle(ActionEvent e) {
             squarePane.removesquare();
+            circlePane.removecircle();
             borderPane.setCenter(squarePane);
             squarePane.addsquare();
+            iscircle = false;
         }
     }
     
     class EnlargeHandler implements EventHandler<ActionEvent> {
         @Override // Override the handle method
         public void handle(ActionEvent e) {
-            circlePane.enlarge();
-            squarePane.enlarge();
+            if(iscircle) {
+                circlePane.enlarge();
+            } else {
+                squarePane.enlarge();
+            }
         }
     }
     
     class ShrinkHandler implements EventHandler<ActionEvent> {
         @Override // Override the handle method
         public void handle(ActionEvent e) {
-            circlePane.shrink();
-            squarePane.shrink();
+            if(iscircle) {
+                circlePane.shrink();
+            } else {
+                squarePane.shrink();
+            }            
         }
     }
 
     class ChangeColorHandler implements EventHandler<ActionEvent> {
         @Override // Override the handle method
         public void handle(ActionEvent e) {
-            circlePane.color();
-            squarePane.color();
+            if(iscircle) {
+                circlePane.color();
+            } else {
+                squarePane.color();
+            }
         }
     }
     
