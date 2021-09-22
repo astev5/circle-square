@@ -29,8 +29,7 @@ import javafx.stage.Stage;
 public class Cstevens_JP2_Week2 extends Application {
     private final CirclePane circlePane;
     private final SquarePane squarePane;
-    
-           
+        
     BorderPane borderPane = new BorderPane();
 
     public Cstevens_JP2_Week2() {
@@ -71,7 +70,8 @@ public class Cstevens_JP2_Week2 extends Application {
         // Place the HBox in the bottom of the BorderPane
         borderPane.setBottom(hBox);
         BorderPane.setAlignment(hBox, Pos.CENTER);
-        borderPane.setStyle("-fx-background-color: black");
+        borderPane.setStyle("-fx-border-color: white; "
+                + "-fx-background-color: black;");
         
         // Create a scene and place it in the stage
         Scene scene = new Scene(borderPane, 600, 450);
@@ -84,6 +84,7 @@ public class Cstevens_JP2_Week2 extends Application {
     class AddCircleHandler implements EventHandler<ActionEvent> {
         @Override // Override the handle method
         public void handle(ActionEvent e) {
+            circlePane.removecircle();
             borderPane.setCenter(circlePane);
             circlePane.addcircle();
         }
@@ -92,6 +93,7 @@ public class Cstevens_JP2_Week2 extends Application {
     class AddSquareHandler implements EventHandler<ActionEvent> {
         @Override // Override the handle method
         public void handle(ActionEvent e) {
+            squarePane.removesquare();
             borderPane.setCenter(squarePane);
             squarePane.addsquare();
         }
@@ -138,6 +140,10 @@ class CirclePane extends StackPane {
         this.circle = new Circle(50);
     }
     
+    public void removecircle() {
+        getChildren().remove(circle);
+    }
+    
     public void addcircle() {
         getChildren().add(circle);
         circle.setStroke(Color.WHITE);
@@ -163,6 +169,10 @@ class SquarePane extends StackPane {
 
     SquarePane() {
         this.square = new Rectangle(75, 75);
+    }
+    
+    public void removesquare() {
+        getChildren().remove(square);
     }
     
     public void addsquare() {
